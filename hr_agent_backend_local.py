@@ -4,7 +4,6 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Pinecone
 from langchain.chat_models import AzureChatOpenAI, ChatOpenAI
 from langchain.chains import RetrievalQA
-# load agents and tools modules
 import pandas as pd
 from azure.storage.filedatalake import DataLakeServiceClient
 from io import StringIO

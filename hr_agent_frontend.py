@@ -1,7 +1,6 @@
 import streamlit as st
 import random
 from streamlit_chat import message
-#from hr_agent_backend_azure import get_response
 from hr_agent_backend_local import get_response
 
 
@@ -29,9 +28,7 @@ if st.button("Send"):
 
     st.session_state["past"].append(user_input)
     st.session_state["generated"].append(response)
-
     st.session_state["input_message_key"] = str(random.random())
-
     st.experimental_rerun()
 
 if st.session_state["generated"]:

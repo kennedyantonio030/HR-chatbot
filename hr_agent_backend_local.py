@@ -28,7 +28,7 @@ embed = OpenAIEmbeddings(
             )
 
 # initialize langchain vectorstore(pinecone) object
-text_field = 'text' # key of dict that stores the text metadata in the index
+text_field = 'text'
 vectorstore = Pinecone(
     index, embed.embed_query, text_field
 )
@@ -53,7 +53,7 @@ python = PythonAstREPLTool(locals={"df": df}) # set access of python_repl tool t
 calculator = LLMMathChain.from_llm(llm=llm, verbose=True)
 
 # create variables for f strings embedded in the prompts
-user = 'Alexander Verdad' # set user
+user = 'Kennedy Antonio' # set user
 df_columns = df.columns.to_list() # print column names of df
 
 # prep the (tk policy) vectordb retriever, the python_repl(with df access) and langchain calculator as tools for the agent

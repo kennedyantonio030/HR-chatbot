@@ -52,18 +52,14 @@ Tools:
 [Azure Data Factory](https://azure.microsoft.com/en-ca/products/data-factory/) - used to create the data pipeline.  
 [SAP HCM](https://www.sap.com/sea/products/hcm/what-is-sap-hr.html) - the source system for employee data.   
 
-### Video Demo 
----
-
-[Youtube Link](https://www.youtube.com/watch?v=id7XRcEIBvg&ab_channel=StephenBonifacio)
 
 ---
 ### Author
 ---
 
-#### Stephen Bonifacio
+#### Kennedy Antonio
 
 Feel free to connect with me on:
 
-Linkedin: https://www.linkedin.com/in/stephenbonifacio/  
-Twitter: https://twitter.com/Stepanogil  
+Linkedin:  https://www.linkedin.com/in/kennedy-antonio-654a7933b/
+

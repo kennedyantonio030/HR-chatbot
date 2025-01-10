@@ -12,7 +12,6 @@ from langchain.agents import initialize_agent, Tool
 from langchain.agents import AgentType
 from langchain import LLMMathChain
 
-# initialize pinecone client and connect to pinecone index
 pinecone.init(
         api_key="<your pinecone api key>",  
         environment="your pinecone environment"  
@@ -31,7 +30,6 @@ embed = OpenAIEmbeddings(
                 openai_api_type="azure",
             )
 
-# initialize langchain vectorstore(pinecone) object
 text_field = 'text' # key of dict that stores the text metadata in the index
 vectorstore = Pinecone(
     index, embed.embed_query, text_field
@@ -47,7 +45,6 @@ llm = AzureChatOpenAI(
     openai_api_type='azure'
     )
 
-# initialize vectorstore retriever object
 timekeeping_policy = RetrievalQA.from_chain_type(
     llm=llm,
     chain_type="stuff",
@@ -55,7 +52,7 @@ timekeeping_policy = RetrievalQA.from_chain_type(
 )
 
 # create employee data tool 
-client = DataLakeServiceClient( # authenticate to azure datalake
+client = DataLakeServiceClient(
                                account_url="<you azure account storage url>",
                                credential="<your azure storage account keys>"
                               )
@@ -77,11 +74,9 @@ python = PythonAstREPLTool(locals={"df": df}) # set access of python_repl tool t
 # create calculator tool
 calculator = LLMMathChain.from_llm(llm=llm, verbose=True)
 
-# create variables for f strings embedded in the prompts
-user = 'Alexander Verdad' # set user
+user = 'Kennedy Antonio' # set user
 df_columns = df.columns.to_list() # print column names of df
 
-# prep the (tk policy) vectordb retriever, the python_repl(with df access) and langchain calculator as tools for the agent
 tools = [
     Tool(
         name = "Timekeeping Policies",

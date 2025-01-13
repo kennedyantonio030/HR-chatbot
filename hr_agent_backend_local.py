@@ -19,9 +19,8 @@ pinecone.init(
 ) 
 
 index_name = 'tk-policy'
-index = pinecone.Index(index_name) # connect to pinecone index
+index = pinecone.Index(index_name)
 
-# initialize embeddings object; for use with user query/input
 embed = OpenAIEmbeddings(
                 model = 'text-embedding-ada-002',
                 openai_api_key="<your openai api key from from platform.openai.com>",
@@ -46,17 +45,14 @@ timekeeping_policy = RetrievalQA.from_chain_type(
     retriever=vectorstore.as_retriever(),
 )
 
-df = pd.read_csv("employee_data.csv") # load employee_data.csv as dataframe
-python = PythonAstREPLTool(locals={"df": df}) # set access of python_repl tool to the dataframe
-
+df = pd.read_csv("employee_data.csv") 
+python = PythonAstREPLTool(locals={"df": df}) 
 # create calculator tool
 calculator = LLMMathChain.from_llm(llm=llm, verbose=True)
 
-# create variables for f strings embedded in the prompts
 user = 'Kennedy Antonio' # set user
 df_columns = df.columns.to_list() # print column names of df
 
-# prep the (tk policy) vectordb retriever, the python_repl(with df access) and langchain calculator as tools for the agent
 tools = [
     Tool(
         name = "Timekeeping Policies",
@@ -97,7 +93,6 @@ tools = [
 agent_kwargs = {'prefix': f'You are friendly HR assistant. You are tasked to assist the current user: {user} on questions related to HR. You have access to the following tools:'}
 
 
-# initialize the LLM agent
 agent = initialize_agent(tools, 
                          llm, 
                          agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, 

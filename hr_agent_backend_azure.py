@@ -18,10 +18,8 @@ pinecone.init(
 ) 
 
 index_name = 'tk-policy'
-index = pinecone.Index(index_name) # connect to pinecone index
+index = pinecone.Index(index_name)
 
-
-# initialize embeddings object; for use with user query/input
 embed = OpenAIEmbeddings(
                 deployment="<your deployment name>",
                 model="text-embedding-ada-002",
@@ -30,12 +28,11 @@ embed = OpenAIEmbeddings(
                 openai_api_type="azure",
             )
 
-text_field = 'text' # key of dict that stores the text metadata in the index
+text_field = 'text'
 vectorstore = Pinecone(
     index, embed.embed_query, text_field
 )
 
-#initialize LLM object
 llm = AzureChatOpenAI(    
     deployment_name="<your deployment name>", 
     model_name="gpt-35-turbo", 
@@ -51,12 +48,10 @@ timekeeping_policy = RetrievalQA.from_chain_type(
     retriever=vectorstore.as_retriever(),
 )
 
-# create employee data tool 
 client = DataLakeServiceClient(
                                account_url="<you azure account storage url>",
                                credential="<your azure storage account keys>"
                               )
-# azure data lake boilerplate to load from file system.  
 file = client.get_file_system_client("<your azure storage account name>") \
              .get_file_client("employee_data/employee_data.csv") \
              .download_file() \
